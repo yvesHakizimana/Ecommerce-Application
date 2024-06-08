@@ -1,5 +1,6 @@
 package com.rca.ecommerce.product;
 
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +23,9 @@ public class ProductService {
     }
 
     public ProductResponse findProductById(Integer productId) {
-        return null;
+        return productRepository.findById(productId)
+                .map(productMapper::toProductResponse)
+                .orElseThrow(() -> new EntityNotFoundException("Product not found with the ID::" + productId));
     }
 
     public List<ProductResponse> findAll() {
