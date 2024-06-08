@@ -29,6 +29,9 @@ public class ProductService {
     }
 
     public List<ProductResponse> findAll() {
-        return null;
+        return productRepository.findAll()
+                .stream()
+                .map(productMapper::toProductResponse)
+                .toList();
     }
 }
