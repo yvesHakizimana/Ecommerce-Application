@@ -18,6 +18,7 @@ public class CustomerService {
         var customer = customerRepository.save(customerMapper.toCustomer(customerRequest));
         return customer.getId();
     }
+
     public void updateCustomer(CustomerRequest customerRequest){
         //Find the Customer by ID or throw an exception saying that the customer is not found.
         var customer = customerRepository.findById(customerRequest.id())
@@ -42,5 +43,9 @@ public class CustomerService {
                 .stream()
                 .map(customerMapper::fromCustomer)
                 .toList();
+    }
+
+    public Boolean existsById(String customerId) {
+        return customerRepository.findById(customerId).isPresent();
     }
 }
