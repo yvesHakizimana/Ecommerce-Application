@@ -48,4 +48,10 @@ public class CustomerService {
     public Boolean existsById(String customerId) {
         return customerRepository.findById(customerId).isPresent();
     }
+
+    public CustomerResponse findById(String customerId) {
+        return customerRepository.findById(customerId)
+                .map(customerMapper::fromCustomer)
+                .orElseThrow(() -> new CustomerNotFoundException(String.format("Cannot find customer with id:: %s", customerId)));
+    }
 }
