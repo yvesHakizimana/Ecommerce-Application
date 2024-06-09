@@ -10,6 +10,8 @@ import com.rca.ecommerce.product.ProductClient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class  OrderService {
@@ -48,5 +50,9 @@ public class  OrderService {
                 customer, productsPurchased));
 
         return order.getId();
+    }
+
+    public List<OrderResponse> findAll() {
+        return orderRepository.findAll().stream().map(orderMapper::fromOrder).toList();
     }
 }
