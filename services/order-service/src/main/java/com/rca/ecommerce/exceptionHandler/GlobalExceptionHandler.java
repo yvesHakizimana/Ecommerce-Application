@@ -15,7 +15,7 @@ import java.util.HashMap;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(BusinessException.class)
-    public ResponseEntity<String> handleProductPurchaseException(BusinessException exp) {
+    public ResponseEntity<String> handleBusinessException(BusinessException exp) {
         return ResponseEntity
                 .status(HttpStatus.BAD_REQUEST)
                 .body(exp.getMessage());

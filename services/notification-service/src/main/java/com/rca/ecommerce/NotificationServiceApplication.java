@@ -7,7 +7,6 @@ import org.springframework.scheduling.annotation.EnableAsync;
 
 @SpringBootApplication
 @EnableAsync
-@EnableKafka
 public class NotificationServiceApplication {
 
 	public static void main(String[] args) {

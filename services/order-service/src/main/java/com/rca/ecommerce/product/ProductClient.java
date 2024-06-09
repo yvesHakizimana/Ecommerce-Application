@@ -8,13 +8,12 @@ import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class ProductClient {
-    @Value("${application.config.product-url")
+    @Value("${application.config.product-url}")
     private String productServiceUrl;
     private final RestTemplate restTemplate;
 
@@ -25,12 +24,13 @@ public class ProductClient {
         HttpEntity<List<PurchaseRequest>> purchaseRequestEntity = new HttpEntity<>(purchaseRequests, headers);
         //Building our Http Response Type
         ParameterizedTypeReference<List<PurchaseResponse>> responseType = new ParameterizedTypeReference<>() {};
-        // Retrieving the request from the another microservice.
+        // Retrieving the request from another microservice.
         ResponseEntity<List<PurchaseResponse>> responseEntity = restTemplate.exchange(
                 productServiceUrl + "/purchase", HttpMethod.POST, purchaseRequestEntity, responseType
         );
-        if(responseEntity.getStatusCode().isError())
-            throw new BusinessException("An error occurred while processing the products purchase ::" + responseEntity.getStatusCode());
+        if (responseEntity.getStatusCode().isError() || responseEntity.getBody() == null) {
+            throw new BusinessException("An error occurred while processing the products purchase: " + responseEntity.getStatusCode());
+        }
         return responseEntity.getBody();
     }
 }
