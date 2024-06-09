@@ -1,0 +1,38 @@
+spring:
+  application:
+    name: notification-service
+  data:
+    mongodb:
+      username: ms_mongo_server_username
+      password: ms_mongo_server_password
+      port: 27018
+      host: localhost
+      database: customer
+      authentication-database: admin
+  kafka:
+    consumer:
+      bootstrap-servers: localhost:9092
+      group-id: paymentGroup,orderGroup
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonSerializer
+      properties:
+        spring.json.trusted.packages: '*'
+        spring.json.type.mapping: orderConfirmation:com.rca.ecommerce.kafka.OrderConfirmation,paymentNotificationRequest:com.rca.ecommerce.notification.PaymentNotificationRequest
+  mail:
+    host: localhost
+    port: 1025
+    username: mail-username
+    password: mail-password
+    properties:
+      mail:
+        smtp:
+          trust: '*'
+        auth: true
+        starttls:
+          enabled: true
+        connectionTimeout: 5000
+        timeout: 3000
+        writeTimeout: 5000
+server:
+  port: 8075
