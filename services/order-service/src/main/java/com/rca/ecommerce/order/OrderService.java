@@ -6,6 +6,8 @@ import com.rca.ecommerce.kafka.OrderConfirmation;
 import com.rca.ecommerce.kafka.OrderProducer;
 import com.rca.ecommerce.orderLine.OrderLineRequest;
 import com.rca.ecommerce.orderLine.OrderLineService;
+import com.rca.ecommerce.payment.PaymentClient;
+import com.rca.ecommerce.payment.PaymentRequest;
 import com.rca.ecommerce.product.ProductClient;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +24,7 @@ public class  OrderService {
     private final OrderMapper orderMapper;
     private final OrderLineService orderLineService;
     private final OrderProducer orderProducer;
+    private final PaymentClient paymentClient;
 
     public Integer createOrder(OrderRequest orderRequest) {
         //Check if we have the customer --> Communicated  Customer MicroService using OpenFeign
@@ -41,7 +44,16 @@ public class  OrderService {
                     purchaseRequest.quantity()
             ));
         }
-        // todo Start payment process
+        // Starting the payment Process
+        var paymentRequest = new PaymentRequest(
+                orderRequest.amount(),
+                orderRequest.paymentMethod(),
+                order.getId(),
+                order.getReference(),
+                customer
+                );
+        //Sending the order details to Payment MicroService.
+        paymentClient.requestOrderPayment(paymentRequest);
 
         //Send the order confirmation --> to the notification Microservice.
         orderProducer.sendOrderConfirmation(new OrderConfirmation(
