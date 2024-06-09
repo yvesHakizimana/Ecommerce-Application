@@ -4,7 +4,7 @@ import com.rca.ecommerce.payment.PaymentMethod;
 
 import java.math.BigDecimal;
 
-public record PaymentNotificationRequest(
+public record PaymentConfirmation(
         String orderReference,
         BigDecimal amount,
         PaymentMethod paymentMethod,

@@ -1,7 +1,7 @@
 package com.rca.ecommerce.payment;
 
 import com.rca.ecommerce.notification.NotificationProducer;
-import com.rca.ecommerce.notification.PaymentNotificationRequest;
+import com.rca.ecommerce.notification.PaymentConfirmation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +18,7 @@ public class PaymentService {
         var payment = paymentRepository.save(paymentMapper.toPayment(paymentRequest));
 
         //Sending the Payment Notification Information to Notification Microservice.
-        notificationProducer.sendNotification(new PaymentNotificationRequest(
+        notificationProducer.sendNotification(new PaymentConfirmation(
                 paymentRequest.orderReference(),
                 paymentRequest.amount(),
                 paymentRequest.paymentMethod(),

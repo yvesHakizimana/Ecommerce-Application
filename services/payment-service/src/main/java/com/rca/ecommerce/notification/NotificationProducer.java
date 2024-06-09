@@ -12,12 +12,12 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 @Slf4j
 public class NotificationProducer {
-    private  final KafkaTemplate<String, PaymentNotificationRequest> kafkaTemplate;
+    private  final KafkaTemplate<String, PaymentConfirmation> kafkaTemplate;
 
-    public void sendNotification(PaymentNotificationRequest paymentNotificationRequest) {
-        log.info("Sending notification with body {}", paymentNotificationRequest);
-        Message<PaymentNotificationRequest> paymentNotification = MessageBuilder
-                .withPayload(paymentNotificationRequest)
+    public void sendNotification(PaymentConfirmation paymentConfirmation) {
+        log.info("Sending notification with body {}", paymentConfirmation);
+        Message<PaymentConfirmation> paymentNotification = MessageBuilder
+                .withPayload(paymentConfirmation)
                 .setHeader(KafkaHeaders.TOPIC, "payment-topic")
                 .build();
         kafkaTemplate.send(paymentNotification);
