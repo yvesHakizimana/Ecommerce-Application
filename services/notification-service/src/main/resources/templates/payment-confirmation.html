@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PaymentConfirmation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        .email-container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .email-header {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+        .email-body {
+            padding: 20px;
+        }
+        .email-footer {
+            background-color: #f4f4f4;
+            padding: 10px;
+            text-align: center;
+            font-size: 12px;
+            color: #999;
+        }
+        .email-body h2 {
+            color: #4CAF50;
+        }
+        .email-body p {
+            line-height: 1.6;
+        }
+        .order-details {
+            margin: 20px 0;
+        }
+        .order-details th, .order-details td {
+            padding: 10px;
+            text-align: left;
+        }
+        .order-details th {
+            background-color: #f4f4f4;
+        }
+    </style>
+</head>
+<body>
+<div class="email-container">
+    <div class="email-header">
+        <h1>Payment Confirmation</h1>
+    </div>
+    <div class="email-body">
+        <h2>Dear <span th:text="${customerName}">Customer Name</span>,</h2>
+        <p>Thank you for your purchase! We are pleased to confirm your payment of <strong><span th:text="${amount}">$0.00</span></strong> for your order has been successful.</p>
+        <div class="order-details">
+            <table>
+                <tr>
+                    <th>Order Reference:</th>
+                    <td><span th:text="${orderReference}">ORD123456</span></td>
+                </tr>
+                <tr>
+                    <th>Amount Paid:</th>
+                    <td><span th:text="${amount}">$0.00</span></td>
+                </tr>
+            </table>
+        </div>
+        <p>If you have any questions, please contact us at <a href="mailto:contact@yves-ecommerce.com">contact@yves-ecommerce.com</a>.</p>
+        <p>Thank you for shopping with us!</p>
+        <p>Best regards,<br>The Yves E-commerce Team</p>
+    </div>
+    <div class="email-footer">
+        <p>&copy; 2024 Yves E-commerce. All rights reserved.</p>
+    </div>
+</div>
+</body>
+</html>

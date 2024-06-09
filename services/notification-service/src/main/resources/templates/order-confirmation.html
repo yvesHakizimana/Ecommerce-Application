@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en" >
+<head>
+    <meta charset="UTF-8">
+    <title>OrderConfirmation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        .email-container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .email-header {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+        .email-body {
+            padding: 20px;
+        }
+        .email-footer {
+            background-color: #f4f4f4;
+            padding: 10px;
+            text-align: center;
+            font-size: 12px;
+            color: #999;
+        }
+        .email-body h2 {
+            color: #4CAF50;
+        }
+        .email-body p {
+            line-height: 1.6;
+        }
+        .order-details {
+            margin: 20px 0;
+        }
+        .order-details th, .order-details td {
+            padding: 10px;
+            text-align: left;
+        }
+        .order-details th {
+            background-color: #f4f4f4;
+        }
+        .products-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .products-table th, .products-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        .products-table th {
+            background-color: #f4f4f4;
+            text-align: left;
+        }
+        .products-table td {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div class="email-container">
+    <div class="email-header">
+        <h1>Order Confirmation</h1>
+    </div>
+    <div class="email-body">
+        <h2>Dear <span th:text="${customerName}">Customer Name</span>,</h2>
+        <p>Thank you for your order! We are pleased to confirm your purchase of the following items:</p>
+        <div class="order-details">
+            <table class="products-table">
+                <thead>
+                <tr>
+                    <th>Product Name</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="product : ${productsPurchased}">
+                    <td th:text="${product.name}">Product Name</td>
+                    <td th:text="${product.description}">Product Description</td>
+                    <td th:text="${product.price}">0.00</td>
+                    <td th:text="${product.quantity}">0</td>
+                    <td th:text="${product.price.multiply(new java.math.BigDecimal(product.quantity))}">0.00</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <p>The total amount paid is <strong><span th:text="${amount}">$0.00</span></strong>.</p>
+        <p>If you have any questions, please contact us at <a href="mailto:contact@yves-ecommerce.com">contact@yves-ecommerce.com</a>.</p>
+        <p>Thank you for shopping with us!</p>
+        <p>Best regards,<br>The Yves E-commerce Team</p>
+    </div>
+    <div class="email-footer">
+        <p>&copy; 2024 Yves E-commerce. All rights reserved.</p>
+    </div>
+</div>
+</body>
+</html>
