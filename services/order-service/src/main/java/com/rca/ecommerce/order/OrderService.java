@@ -7,6 +7,7 @@ import com.rca.ecommerce.kafka.OrderProducer;
 import com.rca.ecommerce.orderLine.OrderLineRequest;
 import com.rca.ecommerce.orderLine.OrderLineService;
 import com.rca.ecommerce.product.ProductClient;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -55,4 +56,12 @@ public class  OrderService {
     public List<OrderResponse> findAll() {
         return orderRepository.findAll().stream().map(orderMapper::fromOrder).toList();
     }
+
+    public OrderResponse findOrderById(Integer orderId) {
+        return orderRepository.findById(orderId)
+                .map(orderMapper::fromOrder)
+                .orElseThrow(() -> new EntityNotFoundException("Can not find order by ID::" + orderId));
+    }
+
+
 }
