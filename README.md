@@ -18,6 +18,7 @@ Welcome to our Ecommerce Microservices Application! This application is built us
 - MongoDB: For customer data and notifications storage.
 - Eureka: For service discovery.
 - PostgreSQL: For storing product, category, and payment data.
+- Docker: For containerizing application dependencies.
 - OpenFeign and Rest Templates: For communication between services.
 - API Gateway: For routing requests to appropriate services.
 
@@ -25,13 +26,14 @@ Welcome to our Ecommerce Microservices Application! This application is built us
 To run this application locally, follow these steps:
 
 1. **Clone the Repository:** Clone this repository to your local machine.
-2. **Setup Kafka:** Install and configure Kafka on your machine.
-3. **Setup MongoDB:** Install and configure MongoDB on your machine.
-4. **Setup PostgreSQL:** Install and configure PostgreSQL on your machine.
-5. **Run Config Server:** Start the Config Server.
-6. **Run Eureka Server:** Start the Eureka Server for service discovery.
-7. **Run each Service:** Start each microservice individually.
-8. **Run API Gateway:** Start the API Gateway to handle incoming requests.
+2. **Install Docker:** Install Docker on your machine if not already installed.
+3. **Run Docker Compose:** Use Docker Compose to start containers for dependencies such as Zookeeper, Kafka, mail server, and other required services.
+4. **Setup MongoDB:** Install and configure MongoDB on your machine.
+5. **Setup PostgreSQL:** Install and configure PostgreSQL on your machine.
+6. **Run Config Server:** Start the Config Server.
+7. **Run Eureka Server:** Start the Eureka Server for service discovery.
+8. **Run each Service:** Start each microservice individually.
+9. **Run API Gateway:** Start the API Gateway to handle incoming requests.
 
 ## Configuration
 - Configuration files for each service are located in the Config Server. Modify these files as needed for environment-specific configurations.
@@ -52,6 +54,6 @@ Contributions are welcome! If you find any bugs or have suggestions for improvem
 This project is licensed under the [MIT License](LICENSE).
 
 ## Contact
-For any inquiries or support, please contact YvesHAKIZIMANA at yvhakizimana123@gmail.com
+For any inquiries or support, please contact Yves HAKIZIMANA at yvhakizimana123@gmail.com.
 
 Happy coding! 🚀
