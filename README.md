@@ -1,5 +1,5 @@
 # Ecommerce Microservices Application
-
+![Alt text](diagrams/.png)
 ## Overview
 Welcome to our Ecommerce Microservices Application! This application is built using the microservices architecture, leveraging Spring Boot for robustness and efficiency. Each service is designed to handle specific functionalities of an ecommerce platform, promoting modularity and scalability. Below is a breakdown of the services included in this application:
 
